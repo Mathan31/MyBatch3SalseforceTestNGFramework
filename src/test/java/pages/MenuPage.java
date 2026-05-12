@@ -35,11 +35,12 @@ public class MenuPage extends BaseClass {
 		return this;
 	}
 
-//	public SalesPage clickOnSales() {
-//		oWrap.moveToElement(driver.findElement(salesLink), "Sales Link");
-//		oWrap.click(driver.findElement(salesLink), "Sales Link");
-//		return new SalesPage(driver, node);
-//	}
+	public SalesPage clickOnSales() {
+		Actions action = new Actions(driver);
+		action.moveToElement(driver.findElement(salesLink)).perform();
+		driver.findElement(salesLink).click();
+		return new SalesPage();
+	}
 
 	public MenuPage clickOnViewAll() {
 		driver.findElement(viewAllLink).click();

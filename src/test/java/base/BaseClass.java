@@ -9,11 +9,15 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
+import utils.PropertyFileUtil;
+
 public class BaseClass {
 	
+	public String propFileName = "Environment";
 	public static WebDriver driver;
-	public String browserType = "chrome"; // chrome,firefox,edge,safari
-	public String sURL = "https://login.salesforce.com/";
+	public String browserType = PropertyFileUtil.readDataFromPropertyFile(propFileName, "Browser"); //chrome,firefox,edge,safari
+	public String sURL = PropertyFileUtil.readDataFromPropertyFile(propFileName, "URL");
+
 	
 	@BeforeClass
 	public  void invokeBrowser() {
