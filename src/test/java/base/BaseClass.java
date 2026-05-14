@@ -8,16 +8,17 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.DataProvider;
 
 import utils.PropertyFileUtil;
 
 public class BaseClass {
 	
 	public String propFileName = "Environment";
-	public static WebDriver driver;
+	public WebDriver driver; // null --> 123 --> null
 	public String browserType = PropertyFileUtil.readDataFromPropertyFile(propFileName, "Browser"); //chrome,firefox,edge,safari
 	public String sURL = PropertyFileUtil.readDataFromPropertyFile(propFileName, "URL");
-
+	public String excelFileName = "";
 	
 	@BeforeClass
 	public  void invokeBrowser() {
@@ -47,6 +48,13 @@ public class BaseClass {
 	@AfterClass
 	public  void closeBrowser() {
 		driver.quit();
+	}
+	
+
+	@DataProvider(name="TestCaseData")
+	public Object[][] excelData() throws Exception {
+		Object[][] values = utils.DataProviderObject.getValue(excelFileName);
+		return values;
 	}
 
 }

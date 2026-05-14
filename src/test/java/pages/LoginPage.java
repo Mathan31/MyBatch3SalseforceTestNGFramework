@@ -11,8 +11,12 @@ public class LoginPage extends MenuPage{
 	private By remembermeChBox = By.xpath("//label[text()='Remember me']");
 	private By forgotLink = By.id("forgot_password_link");
 	private By loginFailureMsg = By.cssSelector("#error");
+	private WebDriver driver;
 	
-	//private WebDriver driver;
+	public LoginPage(WebDriver driver) {
+		super(driver);
+		this.driver = driver;
+	}
 	
 	public boolean verifyLoginElements() {
 		
@@ -43,7 +47,7 @@ public class LoginPage extends MenuPage{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return new HomePage();
+		return new HomePage(driver);
 	}
 
 	public LoginPage clickOnLoginWithInvalidCredential() {

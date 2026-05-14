@@ -1,6 +1,7 @@
 package testscenarios;
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import base.BaseClass;
@@ -9,11 +10,18 @@ import pages.LoginPage;
 
 public class TC002_CreateLead  extends BaseClass{
 	
-	@Test(priority = 1)
-	public void createLead() {
-		boolean result = new LoginPage()
-				.enterUserName("mathan@credosystemz.sanbox")
-				.enterPassword("Mylearning$8")
+
+	@BeforeTest
+	public void dataSetup() {
+		excelFileName = "TC02";
+	
+	}
+	
+	@Test(priority = 1,dataProvider = "TestCaseData")
+	public void createLead(String userName,String password) {
+		boolean result = new LoginPage(driver)
+				.enterUserName(userName)
+				.enterPassword(password)
 				.clickOnLogin()
 				.verifyHomeElement()
 				.clickOnAppLauncher()
