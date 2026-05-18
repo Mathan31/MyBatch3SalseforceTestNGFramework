@@ -14,7 +14,11 @@ public class TC002_CreateLead  extends BaseClass{
 	@BeforeTest
 	public void dataSetup() {
 		excelFileName = "TC02";
-	
+		authors = "Aravind";
+		category = "Sanity";
+		testName = "Salesforce Create Lead";
+		testDescription = "Validate all the mandatory fields and create a lead by providing only mandatory fields";
+		testModule = "Create Lead";
 	}
 	
 	@Test(priority = 1,dataProvider = "TestCaseData")

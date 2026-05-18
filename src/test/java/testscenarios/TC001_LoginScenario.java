@@ -12,7 +12,11 @@ public class TC001_LoginScenario extends BaseClass{
 	@BeforeTest
 	public void dataSetup() {
 		excelFileName = "TC01";
-	
+		authors = "HariLakshkmi";
+		category = "Smoke";
+		testName = "Salesforce Login";
+		testDescription = "Validate all the mandatory fields and login with valid and invalid credential";
+		testModule = "Login";
 	}
 	
 	@Test(priority = 1)
