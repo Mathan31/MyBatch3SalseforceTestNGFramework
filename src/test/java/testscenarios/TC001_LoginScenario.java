@@ -19,9 +19,9 @@ public class TC001_LoginScenario extends BaseClass{
 		testModule = "Login";
 	}
 	
-	@Test(priority = 1)
+	@Test(priority = 1) 
 	public void loginFieldValidation() {
-		boolean result = new LoginPage(driver)
+		boolean result = new LoginPage(driver,node)
 		.verifyLoginElements();
 		Assert.assertTrue(result);
 	}
@@ -29,7 +29,7 @@ public class TC001_LoginScenario extends BaseClass{
 	@Test(priority = 2,dataProvider = "TestCaseData")
 	public void loginWithValidCredential(String userName,String password) {
 		
-		boolean result = new LoginPage(driver)
+		boolean result = new LoginPage(driver,node)
 		.enterUserName(userName)
 		.enterPassword(password)
 		.clickOnLogin()
@@ -43,7 +43,7 @@ public class TC001_LoginScenario extends BaseClass{
 	
 	@Test(priority = 3)
 	public void loginWithInValidCredential() {
-		boolean result = new LoginPage(driver)
+		boolean result = new LoginPage(driver,node)
 		.enterUserName("mathan@credosystemz.sanbox")
 		.enterPassword("Mylearning$10")
 		.clickOnLoginWithInvalidCredential()

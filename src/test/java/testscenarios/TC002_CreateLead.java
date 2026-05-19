@@ -23,7 +23,7 @@ public class TC002_CreateLead  extends BaseClass{
 	
 	@Test(priority = 1,dataProvider = "TestCaseData")
 	public void createLead(String userName,String password) {
-		boolean result = new LoginPage(driver)
+		boolean result = new LoginPage(driver,node)
 				.enterUserName(userName)
 				.enterPassword(password)
 				.clickOnLogin()

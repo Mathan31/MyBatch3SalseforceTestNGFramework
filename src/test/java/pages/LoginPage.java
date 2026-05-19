@@ -3,8 +3,12 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class LoginPage extends MenuPage{
-	
+import com.aventstack.extentreports.ExtentTest;
+
+import wrapper.SeleniumWrapper;
+
+public class LoginPage extends MenuPage {
+
 	private By usernameTxt = By.id("username");
 	private By passwordTxt = By.id("password");
 	private By loginBtn = By.id("Login");
@@ -12,17 +16,19 @@ public class LoginPage extends MenuPage{
 	private By forgotLink = By.id("forgot_password_link");
 	private By loginFailureMsg = By.cssSelector("#error");
 	private WebDriver driver;
-	
-	public LoginPage(WebDriver driver) {
-		super(driver);
+	private SeleniumWrapper oWrap;
+
+	public LoginPage(WebDriver driver, ExtentTest node) {
+		super(driver, node);
 		this.driver = driver;
+		oWrap = new SeleniumWrapper(driver, node);
 	}
-	
+
 	public boolean verifyLoginElements() {
-		
-		if(driver.findElement(usernameTxt).isDisplayed() &&
-				driver.findElement(passwordTxt).isDisplayed() &&
-				driver.findElement(loginBtn).isDisplayed()) {
+
+		if (oWrap.verifyDisplayedwithReturn(driver.findElement(usernameTxt), "UserName")
+				&& oWrap.verifyDisplayedwithReturn(driver.findElement(passwordTxt), "Password")
+				&& oWrap.verifyDisplayedwithReturn(driver.findElement(loginBtn), "Login Button")) {
 			return true;
 		} else {
 			return false;
@@ -30,38 +36,37 @@ public class LoginPage extends MenuPage{
 	}
 
 	public LoginPage enterUserName(String userName) {
-		driver.findElement(usernameTxt).sendKeys(userName);
+		oWrap.type(driver.findElement(usernameTxt), userName);
 		return this;
 	}
 
 	public LoginPage enterPassword(String password) {
-		driver.findElement(passwordTxt).sendKeys(password);
+		oWrap.type(driver.findElement(passwordTxt), password);
 		return this;
 	}
-   
+
 	public HomePage clickOnLogin() {
-		driver.findElement(loginBtn).click();
+		oWrap.click(driver.findElement(loginBtn), "Login Button");
 		try {
 			Thread.sleep(30000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return new HomePage(driver);
+		return new HomePage(driver, node);
 	}
 
 	public LoginPage clickOnLoginWithInvalidCredential() {
-		driver.findElement(loginBtn).click();
+		oWrap.click(driver.findElement(loginBtn), "Login Button");
 		return this;
 	}
 
 	public boolean validateErrorMsg() {
-		if(driver.findElement(loginFailureMsg).isDisplayed()){
+		if (oWrap.verifyDisplayedwithReturn(driver.findElement(loginFailureMsg), "Login Error Msg")) {
 			return true;
 		} else {
 			return false;
 		}
 	}
-
 
 }

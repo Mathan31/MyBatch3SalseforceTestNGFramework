@@ -61,6 +61,8 @@ public class BaseClass extends HTMLReport {
 		driver.manage().window().maximize();
 		driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(60));
 		driver.get(sURL);
+		startTestCase(testName, testDescription);
+		startTestCase(testModule);
 	}
 	
 	@AfterClass
